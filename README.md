@@ -91,12 +91,6 @@ Please ensure that your code follows the style guide and passes all tests.
 
 ---
 
-## 🔗 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
 ## 📧 Contact
 
-For questions or suggestions, feel free to reach out to [your.email@example.com].
+For questions or suggestions, feel free to reach out to [athulvnair2001@gmail.com].
