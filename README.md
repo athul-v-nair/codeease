@@ -66,7 +66,7 @@ codeease/
     The basic command to start CodeEase is:
 
     ```bash
-    python main.py --log <path-to-log-file>
+    python main.py --command <command-to run the code> --filepath <path-to-program-file>
     ```
 
 ---
