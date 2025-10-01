@@ -45,6 +45,8 @@ codeease/
 │ └── interface.py # Interface for AI model interactions
 ├── config/
 │ └── settings.py # Configuration file
+├── examples/
+│ └── demo_python_code.py # Demo code with errors
 ├── main.py # Entry point to combine everything
 ├── requirements.txt # Dependencies
 └── README.md
