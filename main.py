@@ -2,6 +2,7 @@ import argparse
 from core.watcher import watch_logs
 from core.fixer import suggest_fix
 from core.runner import implement_fix
+from core.runner import re_run
 
 def main(command: str, filepath: str):
     logs=watch_logs(command=command, filepath=filepath)
@@ -19,7 +20,12 @@ def main(command: str, filepath: str):
             print(fixed_code)
 
             # Implementing the fix in the code
-            implement_fix(fix=fixed_code)
+            write_fix=implement_fix(fix=fixed_code, filepath=filepath)
+            
+            # Checking if correct code is injected into the file
+            # If yes, rerun the code if user wishes to
+            if write_fix:
+                re_run(command=command)
         else:
             print("No fix could be generated.")
     else:

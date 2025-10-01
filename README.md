@@ -13,11 +13,12 @@ The project is built as a learning journey into AI coding agents using Hugging F
 - **Sends them to an AI model.**
 - **Suggests possible fixes.**
 
-### 🔄 Phase 2: Watcher & Runner (In-progress)
-- **Watcher:** Continuously monitor log files ✅.
+### ✅ Phase 2: Watcher & Runner (In-progress)
+- **Watcher:** Continuously monitor log files.
 - **Runner:** Rerun the program after applying suggested fixes.
 
-### 🔧 Phase 3: Fixer Enhancements
+### 🔄 Phase 3: Fixer Enhancements
+- **Store common issues into a vector database**
 - **Suggest multiple solutions.**
 - **Rank solutions** (best-first).
 - **Highlight risky changes.**
@@ -26,6 +27,10 @@ The project is built as a learning journey into AI coding agents using Hugging F
 - **Build memory:** Remember past errors and fixes.
 - **Autonomous loop:** Detect → Suggest → Fix → Test → Repeat.
 - **Simple evaluation metrics** (success/failure).
+
+### 💻 Phase 5: Multi-scenario
+- **Fixing Package installation:** Allow agents to fix package install errors (npm/pip).
+- **Explain and Teach:** Auto-generate explanations with examples.
 
 ---
 
