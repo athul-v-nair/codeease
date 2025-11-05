@@ -37,7 +37,7 @@ class VectorStore:
             embeddings=embeddings,
             metadatas=metadatas
         )
-        return "Data embedding added to vector store"
+        return "Data embedding added to vector store."
 
     def search_fix(self, error: str, num_of_results:int=1):
         embedding=self.embedder.encode(error)
