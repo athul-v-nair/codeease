@@ -15,12 +15,7 @@ class EmbeddingModel:
     def encode(self, text: str):
         try:
             result = self.client.feature_extraction(text=text, model=self.model).tolist()
-            print(result)
             return result
         except Exception as e:
             print("Error:", e)
             return None
-
-        
-model = EmbeddingModel()
-model.encode(text="Cannot convert str to int")

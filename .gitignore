@@ -1,3 +1,4 @@
 .env
 venv
 core\__pycache__\
+*.pyc

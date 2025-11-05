@@ -4,7 +4,7 @@ from huggingface_hub import InferenceClient
 
 load_dotenv()
 
-def suggest_fix(logs: str, mode: str):
+def suggest_fix(logs: str):
     if not os.getenv("HUGGINGFACEHUB_API_TOKEN"):
         return
 
@@ -15,10 +15,7 @@ def suggest_fix(logs: str, mode: str):
         )  
 
         # Build prompt
-        if mode == "fix":
-            user_prompt = f"The following error occurred:\n{logs}\nPlease suggest the best corrected code. Also don't explain the code, just show the solution"
-        elif mode == "explain":
-            user_prompt = f"The following error occurred:\n{logs}\nPlease explain why this happened and how to avoid it."
+        user_prompt=f"The following error occurred:\n{logs}\nPlease suggest the best corrected code. Please explain why this happened and how to avoid it in minimal words. The output must me in this format Proposed Fix:(Write the correct code here), Error:(Provide the main error here),Explanation: (Provide small explanation on how to fix it)"
 
         # Setting the behaviour
         messages = [

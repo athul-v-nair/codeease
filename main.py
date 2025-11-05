@@ -13,7 +13,7 @@ def main(command: str, filepath: str):
 
     if logs.get('error'):
         print("\n⚠️ Error detected. Asking Fixer...")
-        fixed_code=suggest_fix(logs.get("error"), mode="fix")
+        fixed_code=suggest_fix(logs.get("error"))
         
         if fixed_code:
             print("\n💡 Suggested Fix:")
