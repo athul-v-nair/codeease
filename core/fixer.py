@@ -1,17 +1,22 @@
-import os
-from dotenv import load_dotenv
 from huggingface_hub import InferenceClient
+from langchain.tools import tool
+from config.settings import HUGGINGFACEHUB_API_TOKEN
+from config.settings import CODING_ASSISTANT_MODEL
 
-load_dotenv()
-
+@tool
 def suggest_fix(logs: str):
-    if not os.getenv("HUGGINGFACEHUB_API_TOKEN"):
+    """Analyze the log and suggest fix accordingly using llm.
+
+    Args:
+        logs: Log when running the program
+    """
+    if not HUGGINGFACEHUB_API_TOKEN:
         return
 
     try:
         client = InferenceClient(
             provider="novita",
-            api_key=os.getenv("HUGGINGFACEHUB_API_TOKEN"),
+            api_key=HUGGINGFACEHUB_API_TOKEN,
         )  
 
         # Build prompt
@@ -25,7 +30,7 @@ def suggest_fix(logs: str):
         
         # Calling the model
         completion = client.chat.completions.create(
-            model="deepseek-ai/DeepSeek-V3.2-Exp",
+            model=CODING_ASSISTANT_MODEL,
             messages=messages
         )
         return completion.choices[0].message["content"]
