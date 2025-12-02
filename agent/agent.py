@@ -6,7 +6,6 @@ from ai.vector_store import VectorStore
 from core.watcher import watch_logs
 from core.runner import re_run
 from core.fixer import suggest_fix
-from config.settings import HUGGINGFACEHUB_API_TOKEN
 from agent.prompt import SYSTEM_PROMPT
 class CodeEaseAgent:
     def __init__(self):
@@ -26,22 +25,22 @@ class CodeEaseAgent:
         # Define tools for the agent
         self.tools = [
             tool(
-                name_or_callable="WatchLogs",
+                name_or_callable="watch_logs",
                 runnable=watch_logs,
                 description="Runs the code initially and returns the log"
             ),
             tool(
-                name_or_callable="SearchFixDB",
+                name_or_callable="search_fix",
                 runnable=self.db.search_fix,
                 description="Searches database for similar past errors."
             ),
             tool(
-                name_or_callable="SuggestFixLLM",
+                name_or_callable="suggest_fix",
                 runnable=suggest_fix,
                 description="Uses LLM to suggest fixes for a given error log."
             ),
             tool(
-                name_or_callable="StoreFixDB",
+                name_or_callable="store_fix",
                 runnable=lambda args: self.db.store_fix(
                     args["error"], args["fix"], args["explanation"]
                 ),
@@ -54,7 +53,7 @@ class CodeEaseAgent:
             #     description="Edits only affected lines in the code file."
             # ),
             tool(
-                name_or_callable="RerunProgram",
+                name_or_callable="re_run",
                 runnable=re_run,
                 description="Re-runs the Python file after patching."
             )
@@ -62,3 +61,6 @@ class CodeEaseAgent:
 
         # Agent creation
         self.agent = create_agent(model=self.chat_model, tools=self.tools, system_prompt=SYSTEM_PROMPT)
+        
+    def execute():
+        pass

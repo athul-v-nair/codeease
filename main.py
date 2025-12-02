@@ -3,6 +3,7 @@ from core.watcher import watch_logs
 from core.fixer import suggest_fix
 from core.runner import implement_fix
 from core.runner import re_run
+from agent.agent import CodeEaseAgent
 
 def main(command: str, filepath: str):
     logs=watch_logs(command=command, filepath=filepath)
@@ -38,4 +39,6 @@ if __name__=="__main__":
     args = parser.parse_args()
 
     if args.command and args.filepath:
-        main(args.command, args.filepath)         
+        # main(args.command, args.filepath) 
+        agent=CodeEaseAgent().agent
+        print(agent.invoke({"input": f"command={args.command}, filepath={args.filepath}"}))

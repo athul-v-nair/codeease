@@ -33,6 +33,8 @@ def suggest_fix(logs: str):
             model=CODING_ASSISTANT_MODEL,
             messages=messages
         )
+        
+        print("✅Fix and Explanation: ", completion.choices[0].message["content"])
         return completion.choices[0].message["content"]
     except Exception as e:
         return f"Fixer failed: {e}"
