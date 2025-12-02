@@ -1,26 +1,28 @@
 from langchain.tools import tool
 from langchain.agents import  create_agent
 from langchain_huggingface import HuggingFaceEndpoint
+from langchain_huggingface import ChatHuggingFace
 from ai.vector_store import VectorStore
 from core.watcher import watch_logs
 from core.runner import re_run
 from core.fixer import suggest_fix
 from config.settings import HUGGINGFACEHUB_API_TOKEN
 from agent.prompt import SYSTEM_PROMPT
-
 class CodeEaseAgent:
     def __init__(self):
         self.db=VectorStore()
+        
         # Initialize the main LLM for workflow automation
-        self.model = HuggingFaceEndpoint(
-            repo_id="openai/gpt-oss-safeguard-20b",
-            huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN,
-            temperature=0.3,
+        self.llm = HuggingFaceEndpoint(
+            repo_id="deepseek-ai/DeepSeek-R1-0528",
             task="text-generation",
-            top_p=0.95,
-            max_new_tokens=512
+            max_new_tokens=512,
+            do_sample=False,
+            repetition_penalty=1.03,
+            provider="auto",  # let Hugging Face choose the best provider for you
         )
-
+        self.chat_model = ChatHuggingFace(llm=self.llm)
+        
         # Define tools for the agent
         self.tools = [
             tool(
@@ -59,7 +61,4 @@ class CodeEaseAgent:
         ]
 
         # Agent creation
-        self.agent = create_agent(model=self.model, tools=self.tools, system_prompt=SYSTEM_PROMPT)
-        print("agent", self.agent)
-        
-CodeEaseAgent()
+        self.agent = create_agent(model=self.chat_model, tools=self.tools, system_prompt=SYSTEM_PROMPT)
